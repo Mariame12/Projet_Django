@@ -1,0 +1,36 @@
+{% extends 'layouts.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+
+        {% for article in articles %}
+
+            <div class="col-lg-4">
+                <div class="card" style="width: 18rem;">
+                    <img src="{{article.image.url}}" alt="{{article.titre}}" width="250px" height="250px">
+                    <div class="card-body">
+                      <h5 class="card-title">{{ article.titre}}</h5>
+                      <p class="card-text">
+                          {{ article.description}}<br/>
+                      </p>
+                      <p class="card-text">
+                        <a href="{%url 'detail' slug=article.slug %}" > <h5>Catégorie: {{ article.categorie}}</h5></a>
+
+                        Date: {{ article.date_de_publication}}<br/>
+                        Publié par: {{ article.user}}
+                     </p>
+                      <a href="{%url 'detail' slug=article.slug %}" class="btn btn-primary">En savoir plus →</a>
+                    </div>
+                </div>
+            </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+
+
+{% endblock %}

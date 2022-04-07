@@ -1,0 +1,54 @@
+{% extends 'layouts.html' %}
+
+{% block content %}
+    <div class="align-center">
+        <h2 class="card-title">{{ article.titre}}</h2>
+        <img src="{{article.image.url}}" alt="{{article.titre}}" width="250px" height="250px">
+        <p class="card-text">
+            {{ article.description}}
+        </p>
+        <p class="card-text">
+           <h5>Catégorie: {{ article.categorie}}</h5>
+           Date: {{ article.date_de_publication}}<br/>
+           Publié par: {{ article.user}}
+        </p>
+
+        <section class="mb-5">
+                <div class="card bg-light">
+                    {% with commentaires.count as total_commentaires %}
+                        ({{total_commentaires}}) Commentaire{{total_commentaires | pluralize}}
+                    {% endwith %}
+                    <div class="card-body">
+                        <!-- Comment form-->
+                        {% if nouveauCommentaire %}
+                            <h3> Vous venez de commenter ce post.</h3>
+                        {% else %}
+                            <h3> Ajoutez un commentaire.</h3>
+                            {{commentaireForm.as_p}}
+                            {% csrf_token %}
+                            <button class="btn-primary" type="submit">Commenter</button><br>
+                        {% endif %}
+                        <!-- <form class="mb-4">
+                            <textarea class="form-control" rows="3" placeholder="Commenter">
+
+                            </textarea>
+                        </form> -->
+                        <!-- Comment with nested comments-->
+                        <!-- Single comment-->
+                        {% for commentaire in commentaires%}
+                            <div class="d-flex">
+                                <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..."></div>
+                                <div class="ms-3">
+                                    <br>
+                                    <div class="fw-bold">Note : {{commentaire.plus_moins}}<br>  Date:{{commentaire.date_commmentaire}}<br> </div>
+                                   Commentaire: {{commentaire.commentaire}}
+
+                                </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </section>
+    </div>
+
+{% endblock %}

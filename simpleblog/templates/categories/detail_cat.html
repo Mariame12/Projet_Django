@@ -1,0 +1,25 @@
+{% extends 'layouts.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+            <div class="col-lg-4">
+                <div class="card" style="width: 18rem;">
+                    <img src="{{cate.image.url}}" alt="{cate.titre}}" width="250px" height="250px">
+                    <div class="card-body">
+                      <h5 class="card-title">{{cate.titre}}</h5>
+                      <p class="card-text">
+                        Date: {{cate.date_publication}}<br/>
+                     </p>
+                      <p class="card-text">
+                          {{ cate.description}}<br/>
+                      </p>
+                </div>
+            </div>
+              <br/> <br/>
+
+    </div>
+
+</div>
+    <br/>
+ {% endblock %}
